@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | PCTE E-Library</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="bg-canvas"></div>
+<canvas id="particles-canvas"></canvas>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+  </div>
+  <div class="sidebar-divider"></div>
+  <a href="index.html"     class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-tooltip">Home</span>
+  </a>
+  <a href="gallery.html"   class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <span class="nav-tooltip">Library</span>
+  </a>
+  <a href="dashboard.html" class="nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <span class="nav-tooltip">Dashboard</span>
+  </a>
+  <a href="issue.html"     class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    <span class="nav-tooltip">Issue/Return</span>
+  </a>
+  <div class="sidebar-divider"></div>
+  <div class="theme-toggle-btn"></div>
+</nav>
+
+<div class="top-bar">
+  <div class="top-pill"><span class="live-dot"></span> Admin Dashboard</div>
+</div>
+
+<div class="page-wrapper">
+  <div class="main-content">
+
+    <!-- Header -->
+    <div class="dash-header">
+      <div class="dash-greeting">Good Day, <span>Admin</span> 👋</div>
+      <div class="dash-date" id="dash-date"></div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="stat-grid">
+      <div class="stat-card total reveal">
+        <div class="stat-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="stat-card-number" id="count-total">0</div>
+        <div class="stat-card-label">Total Books</div>
+        <div class="stat-card-change">↑ 12 added this month</div>
+      </div>
+      <div class="stat-card issued reveal" data-delay="80">
+        <div class="stat-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="stat-card-number" id="count-issued">0</div>
+        <div class="stat-card-label">Currently Issued</div>
+        <div class="stat-card-change" style="color:var(--danger);">↑ 4 issued today</div>
+      </div>
+      <div class="stat-card avail reveal" data-delay="160">
+        <div class="stat-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="stat-card-number" id="count-avail">0</div>
+        <div class="stat-card-label">Available</div>
+        <div class="stat-card-change">✓ Ready to issue</div>
+      </div>
+      <div class="stat-card members reveal" data-delay="240">
+        <div class="stat-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="stat-card-number" id="count-members">0</div>
+        <div class="stat-card-label">Active Members</div>
+        <div class="stat-card-change">↑ 18 new this week</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-row">
+      <!-- Bar chart: Monthly issues -->
+      <div class="chart-card reveal">
+        <div class="chart-title">Monthly Borrowings</div>
+        <div class="chart-sub">Books issued per month — 2024</div>
+        <div class="bar-chart" id="bar-chart"></div>
+      </div>
+
+      <!-- Donut: Available vs Issued -->
+      <div class="chart-card reveal" data-delay="100">
+        <div class="chart-title">Collection Status</div>
+        <div class="chart-sub">Current availability breakdown</div>
+        <div class="donut-wrap">
+          <svg id="donut-chart" class="donut-svg"></svg>
+          <div class="donut-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#4caf82"></span> Available <span class="legend-pct" id="avail-pct"></span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#e05a5a"></span> Issued    <span class="legend-pct" id="issued-pct"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <div class="activity-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div>
+          <div class="chart-title">Recent Activity</div>
+          <div class="chart-sub">Latest transactions across the library</div>
+        </div>
+        <a href="issue.html" class="btn-outline" style="font-size:0.74rem;padding:8px 16px;">View All</a>
+      </div>
+      <div class="activity-list" id="activity-list"></div>
+    </div>
+
+    <!-- Top borrowed books -->
+    <div class="activity-card reveal">
+      <div class="chart-title" style="margin-bottom:6px;">Most Borrowed Books</div>
+      <div class="chart-sub" style="margin-bottom:22px;">All-time borrowing leaderboard</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;" id="top-books-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">PCTE E-Library</div>
+  <div class="footer-text">E-Library Management via Cloud in Local Schools &nbsp;·&nbsp; PCTE Group of Institutes</div>
+  <div class="footer-credit">Designed by <span>Zaidd</span> &nbsp;·&nbsp; <span class="year"></span></div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// Build top books list after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const container = document.getElementById('top-books-list');
+    if (!container) return;
+    const sorted = [...BOOKS].sort((a,b) => b.issues - a.issues).slice(0,8);
+    sorted.forEach((book, i) => {
+      const el = document.createElement('div');
+      el.className = 'top-book-item';
+      el.innerHTML = `
+        <div class="activity-avatar" style="background:${book.color};width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;color:white;">${i+1}</div>
+        <div style="min-width:0">
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${book.title}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px;">${book.issues} borrows</div>
+        </div>`;
+      container.appendChild(el);
+    });
+
+    // Donut percentages
+    const total  = BOOKS.length;
+    const issued = BOOKS.filter(b=>!b.available).length;
+    const avEl   = document.getElementById('avail-pct');
+    const isEl   = document.getElementById('issued-pct');
+    if (avEl) avEl.textContent = `${Math.round((total-issued)/total*100)}%`;
+    if (isEl) isEl.textContent = `${Math.round(issued/total*100)}%`;
+  }, 200);
+});
+</script>
+</body>
+</html>
